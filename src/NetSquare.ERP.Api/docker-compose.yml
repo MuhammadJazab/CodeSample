@@ -1,0 +1,75 @@
+version: '3.4'
+
+services:
+
+  sqlserver:
+    container_name: sql_server
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "@Alpha123456"
+      ACCEPT_EULA: "Y"
+    networks:
+      - erp-network
+            
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  netsquare.erp.gateway.api:
+    image: ${DOCKER_REGISTRY-}netsquareerpgateway
+    build:
+      context: .
+      dockerfile: src/Gateway/ApiGateway/Dockerfile
+    ports:
+      - "8030:80"
+    networks:
+      - erp-network
+
+  netsquare.erp.authentication.api:
+    image: ${DOCKER_REGISTRY-}netsquareerpauthentication
+    build:
+      context: .
+      dockerfile: src/Services/Authentication/NetSquare.ERP.Authentication.Api/Dockerfile
+    networks:
+      - erp-network
+
+
+  netsquare.erp.branch.api:
+    image: ${DOCKER_REGISTRY-}netsquareerpbranch
+    build:
+      context: .
+      dockerfile: src/Services/Branch/NetSquare.ERP.Branch.Api/Dockerfile
+    ports:
+      - "8031:80"
+    networks:
+      - erp-network
+
+  grpcservice:
+    image: ${DOCKER_REGISTRY-}grpcservice
+    build:
+      context: .
+      dockerfile: src/Services/gRPCService/Dockerfile
+    ports:
+      - "8033:80"
+    networks:
+      - erp-network
+
+
+  netsquare.erp.humanresource.api:
+    image: ${DOCKER_REGISTRY-}netsquareerphumanresource
+    build:
+      context: .
+      dockerfile: src/Services/HmanResource/NetSquare.ERP.HumanResource.Api/Dockerfile
+    ports:
+      - "8034:80"
+    networks:
+      - erp-network
+
+networks:
+  erp-network:
+    name: erp-network

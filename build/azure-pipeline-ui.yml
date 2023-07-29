@@ -1,0 +1,25 @@
+trigger:
+- master
+- releases/*
+
+pr:
+- master
+- relases/*
+
+pool:
+  name: Azure Pipelines
+  vmImage: windows-latest
+
+variables:
+  APP_SOLUTION: 'src/NetSquare.ERP.Client'
+
+steps:
+- checkout: self
+  fetchDepth: 1
+  clean: true
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: '$(APP_SOLUTION)'
+    command: install

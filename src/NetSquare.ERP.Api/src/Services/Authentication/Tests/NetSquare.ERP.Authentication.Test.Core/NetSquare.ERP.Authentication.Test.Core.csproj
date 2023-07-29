@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+   <ItemGroup>
+	  <PackageReference Include="Autofac" Version="7.0.1" />
+	  <PackageReference Include="AutoMapper" Version="12.0.1" />
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+	  <PackageReference Include="Moq" Version="4.18.4" />
+	  <PackageReference Include="MSTest.TestAdapter" Version="3.0.3" />
+	  <PackageReference Include="MSTest.TestFramework" Version="3.0.3" />
+	  <PackageReference Include="coverlet.collector" Version="6.0.0"><IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+<PrivateAssets>all</PrivateAssets>
+</PackageReference>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="MockData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MockData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\NetSquare.ERP.Authentication.Api\NetSquare.ERP.Authentication.Api.csproj" />
+    <ProjectReference Include="..\..\NetSquare.ERP.Authentication.Domain\NetSquare.ERP.Authentication.Domain.csproj" />
+    <ProjectReference Include="..\..\NetSquare.ERP.Authentication.Infrastructure\NetSquare.ERP.Authentication.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

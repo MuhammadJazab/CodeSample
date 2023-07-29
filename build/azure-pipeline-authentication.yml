@@ -1,0 +1,81 @@
+trigger:
+- main
+- releases/*
+pr:
+- main
+- releases/*
+
+pool:
+  name: Azure Pipelines
+  vmImage: windows-latest
+
+variables:
+  API_SOLUTION: 'src/NetSquare.ERP.Api/src/Services/Authentication/**/*.csproj'
+  API_TESTS: 'src/NetSquare.ERP.Api/src/Services/Authentication/tests/*Tests/**/*.csproj'
+  EXCLUDE_MIGRATIONS: 'src/NetSquare.ERP.Api/src/Services/Authentication/NetSquare.ERP.Infrastructure/Migrations/**' 
+  EXCLUDE_SEEDINGS: 'src/NetSquare.ERP.Api/src/Services/Authentication/NetSquare.ERP.Infrastructure/Seedings/**'
+  EXCLUDE_PROGRAM_FILE: 'src/NetSquare.ERP.Api/src/Services/Authentication/NetSquare.ERP.Authentication.Api/Program.cs'
+  RESTORE_NUGET: 'src/NetSquare.ERP.Api/src/Services/Authentication/NetSquare.ERP.Authentication.Api/NuGet.config'
+  COVERAGE_RESULT: '$(Build.SourcesDirectory)/Authentication/CoverageResults'
+  BUILD_CONFIGURATION: 'Release'
+  NUGET_PACKAGES: '$(Pipeline.Workspace)/.nuget/packages'
+
+steps:
+- checkout: self
+  fetchDepth: 1
+  clean: true
+
+- task: NuGetToolInstaller@1
+  displayName: 'Use NuGet '
+  inputs:
+    checkLatest: true
+
+- task: Cache@2
+  displayName: Cache
+  inputs:
+    key: 'nuget | "$(Agent.OS)" | $(Build.SourcesDirectory)/src/NetSquare.ERP.Api/src/Services/Authentication/NetSquare.ERP.Authentication.Api/packages.lock.json'
+    path: '$(NUGET_PACKAGES)'
+    cacheHitVar: 'CACHE_RESTORED'
+    restoreKeys: |
+     nuget | "$(Agent.OS)"
+     nuget
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+    projects: '$(API_SOLUTION)'
+    feedsToUse: config
+    nugetConfigPath: $(RESTORE_NUGET)
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: '$(API_SOLUTION)'
+    arguments: '--no-restore --configuration $(BUILD_CONFIGURATION) --nologo --verbosity q'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: test
+    projects: '$(API_TESTS)'
+    arguments: '--logger trx /p:CollectCoverage=true /p:CoverletOutput=$(Agent.TempDirectory)/TestResults/ "/p:CoverletOutputFormat=\"json,opencover\"" /p:MergeWith=$(Agent.TempDirectory)/TestResults/coverage.json --results-directory $(Agent.TempDirectory)/TestResults/  --verbosity q --no-build --configuration $(BUILD_CONFIGURATION) /p:ExcludeByFile=src/NetSquare.ERP.Api/src/Services/Authentication/Authentication.Api/Program.cs'
+    nobuild: true
+    publishTestResults: false
+    testRunTitle: 'Authentication API Unit Tests'
+  continueOnError: true
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results '
+  inputs:
+    testResultsFormat: VSTest
+    testResultsFiles: '$(Agent.TempDirectory)/TestResults/*.trx'
+    mergeTestResults: true
+  condition: succeededOrFailed()
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage from $(Build.SourcesDirectory)/CoverageResults/Cobertura.xml'
+  inputs:
+    codeCoverageTool: Cobertura    
+    summaryFileLocation: '$(Build.SourcesDirectory)\CodeCoverage\Cobertura.xml'
+    reportDirectory: '$(Build.SourcesDirectory)\CodeCoverage'

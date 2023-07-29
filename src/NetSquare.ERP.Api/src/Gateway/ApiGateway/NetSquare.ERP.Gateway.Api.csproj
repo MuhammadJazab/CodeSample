@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<DockerComposeProjectPath>../../../docker-compose.dcproj</DockerComposeProjectPath>
+		<UserSecretsId>3fa52cdc-3626-44de-8533-63aea16f8333</UserSecretsId>
+		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Yarp.ReverseProxy" Version="2.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="9.1.0.70676">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.4.0" />
+		<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.4.0" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.14" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.0.0-rc9.14" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="Extensions\" />
+		<None Remove="Controllers\" />
+		<None Remove="Application\" />
+		<None Remove="Application\Constants\" />
+		<None Remove="Application\Configurations\" />
+		<None Remove="Application\Models\" />
+		<None Remove="Middlewears\" />
+		<None Remove="Helpers\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Extensions\" />
+		<Folder Include="Controllers\" />
+		<Folder Include="Application\" />
+		<Folder Include="Application\Constants\" />
+		<Folder Include="Application\Configurations\" />
+		<Folder Include="Application\Models\" />
+		<Folder Include="Middlewears\" />
+		<Folder Include="Helpers\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\BuildingBlocks\SystemExtensions\SystemExtensions.csproj">
+	    <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+	  </ProjectReference>
+	</ItemGroup>
+</Project>

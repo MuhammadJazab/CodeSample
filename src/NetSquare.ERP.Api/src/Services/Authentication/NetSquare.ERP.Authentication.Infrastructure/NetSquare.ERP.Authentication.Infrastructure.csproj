@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\NetSquare.ERP.Authentication.Domain\NetSquare.ERP.Authentication.Domain.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="7.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="9.1.0.70676">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="Configurations\" />
+		<None Remove="Data\" />
+		<None Remove="Extensions\" />
+		<None Remove="Repositories\" />
+		<None Remove="Seedings\" />
+		<None Remove="Seedings\SqlScripts\" />
+		<None Remove="Seedings\SqlScripts\20230110_1227_Add_User_And_User_Roles.sql" />
+		<None Remove="Services\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Configurations\" />
+		<Folder Include="Data\" />
+		<Folder Include="Extensions\" />
+		<Folder Include="Repositories\" />
+		<Folder Include="Seedings\" />
+		<Folder Include="Seedings\SqlScripts\" />
+		<Folder Include="Services\" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Seedings\SqlScripts\20230110_1227_Add_User_And_User_Roles.sql" />
+	</ItemGroup>
+</Project>

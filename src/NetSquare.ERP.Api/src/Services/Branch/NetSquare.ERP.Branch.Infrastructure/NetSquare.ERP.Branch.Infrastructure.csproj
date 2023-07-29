@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+ <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="7.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
+	<PackageReference Include="SonarAnalyzer.CSharp" Version="9.1.0.70676">
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  <PrivateAssets>all</PrivateAssets>
+	</PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Configurations\" />
+    <None Remove="Data\" />
+    <None Remove="Extensions\" />
+    <None Remove="Repositories\" />
+    <None Remove="Seedings\" />
+    <None Remove="Services\" />
+    <None Remove="Seedings\SqlScripts\" />
+    <None Remove="Factories\" />
+    <None Remove="Migrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Configurations\" />
+    <Folder Include="Data\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Seedings\" />
+    <Folder Include="Services\" />
+    <Folder Include="Configurations\" />
+    <Folder Include="Data\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Seedings\" />
+    <Folder Include="Services\" />
+    <Folder Include="Seedings\SqlScripts\" />
+    <Folder Include="Factories\" />
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NetSquare.ERP.Branch.Domain\NetSquare.ERP.Branch.Domain.csproj" />
+  </ItemGroup>
+</Project>

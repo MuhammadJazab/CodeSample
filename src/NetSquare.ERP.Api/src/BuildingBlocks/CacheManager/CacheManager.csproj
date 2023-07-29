@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <ItemGroup>
+  	<PackageReference Include="Autofac" Version="7.0.1" />
+  	<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+  	<PackageReference Include="CacheManager.Core" Version="1.2.0" />
+  	<PackageReference Include="CacheManager.StackExchange.Redis" Version="1.2.0" />
+  	<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  	<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+  	<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+  	<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+  	<PackageReference Include="System.Composition.AttributedModel" Version="7.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Cache\" />
+    <None Remove="Implementations\" />
+    <None Remove="Registration\" />
+    <None Remove="Enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Cache\" />
+    <Folder Include="Implementations\" />
+    <Folder Include="Registration\" />
+    <Folder Include="Enums\" />
+  </ItemGroup>
+</Project>

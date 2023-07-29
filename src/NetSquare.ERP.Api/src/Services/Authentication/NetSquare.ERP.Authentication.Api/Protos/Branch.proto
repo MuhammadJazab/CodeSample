@@ -1,0 +1,19 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "NetSquare.ERP.Authentication.Api.Protos";
+
+package Branch;
+
+service BranchGrpc {
+	rpc AddUserToBranch(AddUserToBranchRequest) returns (AddUserToBranchResponse) {}
+}
+
+message AddUserToBranchRequest {
+	string UserId = 1;
+	string BranchId = 2;
+}
+
+message AddUserToBranchResponse {
+	  bool IsSuccessful = 1;
+	  string ResponseMessage = 2;
+}

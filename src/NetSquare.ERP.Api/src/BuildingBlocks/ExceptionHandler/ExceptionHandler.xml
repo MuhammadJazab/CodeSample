@@ -1,0 +1,822 @@
+﻿<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ExceptionHandler</name>
+    </assembly>
+    <members>
+        <member name="T:ExceptionHandler.AutoFacModules.RegisterExceptionPoliciesModules">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.AutoFacModules.RegisterExceptionPoliciesModules" />ca.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.AutoFacModules.RegisterExceptionPoliciesModules.Load(Autofac.ContainerBuilder)">
+            <summary>
+            The Load.
+            </summary>
+            <param name="builder">The builder<see cref="T:Autofac.ContainerBuilder" />.</param>
+        </member>
+        <member name="T:ExceptionHandler.Enumeration.Applications">
+            <summary>
+            Defines the Applications.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.Applications.Gateway">
+            <summary>
+            Defines the Gateway.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.Applications.Authentication">
+            <summary>
+            Defines the Authentication.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.Applications.HumanResource">
+            <summary>
+            Defines the HumanResource.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.Applications.Web">
+            <summary>
+            Defines the Web.
+            </summary>
+        </member>
+        <member name="T:ExceptionHandler.Enumeration.ExceptionPolicies">
+            <summary>
+            Defines the ExceptionPolicies.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.ExceptionPolicies.Admin">
+            <summary>
+            Defines the Admin.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.ExceptionPolicies.Client">
+            <summary>
+            Defines the Client.
+            </summary>
+        </member>
+        <member name="T:ExceptionHandler.Enumeration.ExceptionTypes">
+            <summary>
+            Defines the ExceptionTypes.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.ExceptionTypes.Application">
+            <summary>
+            Defines the Application.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.ExceptionTypes.Authorization">
+            <summary>
+            Defines the Authorization.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.ExceptionTypes.Connection">
+            <summary>
+            Defines the Connection.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.ExceptionTypes.Validation">
+            <summary>
+            Defines the Validation.
+            </summary>
+        </member>
+        <member name="T:ExceptionHandler.Enumeration.MessageDisplayTypes">
+            <summary>
+            Defines the MessageDisplayTypes.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.MessageDisplayTypes.Client">
+            <summary>
+            Defines the Client.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.MessageDisplayTypes.Admin">
+            <summary>
+            Defines the Admin.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.MessageDisplayTypes.All">
+            <summary>
+            Defines the All.
+            </summary>
+        </member>
+        <member name="T:ExceptionHandler.Enumeration.MessageIndicatorTypes">
+            <summary>
+             Defines the MessageIndicatorTypes.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.MessageIndicatorTypes.Warning">
+            <summary>
+             Defines the Warning.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.MessageIndicatorTypes.Information">
+            <summary>
+             Defines the Information.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Enumeration.MessageIndicatorTypes.Error">
+            <summary>
+             Defines the Error.
+            </summary>
+        </member>
+        <member name="T:ExceptionHandler.Extentions.HttpContextExtensions">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Extentions.HttpContextExtensions" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Extentions.HttpContextExtensions.GeneratePolicyExceptions(Microsoft.AspNetCore.Http.HttpContext,Autofac.Features.Indexed.IIndex{System.String,ExceptionHandler.Policies.Interface.IExceptionHandler},System.Exception,System.Boolean,System.String)">
+            <summary>
+            The GeneratePolicyExceptions.
+            </summary>
+            <param name="httpContext">The httpContext<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <param name="exceptionPolicies">The exceptionPolicies<see cref="T:Autofac.Features.Indexed.IIndex`2" />.</param>
+            <param name="exception">The exception<see cref="T:System.Exception" />.</param>
+            <param name="isHandledException">The isHandledException<see cref="T:System.Boolean" />.</param>
+            <param name="genericMessage">The genericMessage<see cref="T:System.String" />.</param>
+            <returns>The <see cref="T:ExceptionHandler.Models.MessagesSummary"/>.</returns>
+        </member>
+        <member name="T:ExceptionHandler.Extentions.TypeExtensions">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Extentions.TypeExtensions" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Extentions.TypeExtensions.GetDescription``1(``0)">
+            <summary>
+            The GetDescription.
+            </summary>
+            <typeparam name="T">The T.</typeparam>
+            <param name="source">The source.</param>
+            <returns>The <see cref="T:System.String" />The T.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Extentions.TypeExtensions.GenerateMessageByExceptionType(System.Enum,Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            The GenerateMessageByExceptionType.
+            </summary>
+            <param name="source">The source<see cref="T:System.Enum" />.</param>
+            <param name="httpContext">The httpContext<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <returns>The <see cref="T:ExceptionHandler.Models.Message" />.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Extentions.TypeExtensions.GenerateMessageCodeByExceptionType(System.Enum,ExceptionHandler.Models.Message,Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            The GenerateMessageCodeByExceptionType.
+            </summary>
+            <param name="source">The source<see cref="T:System.Enum" />.</param>
+            <param name="message">The message<see cref="T:ExceptionHandler.Models.Message" />.</param>
+            <param name="httpContext">The httpContext<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <returns>The <see cref="T:ExceptionHandler.Models.Message" />.</returns>
+        </member>
+        <member name="T:ExceptionHandler.Filters.CustomActionFilterAttribute">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Filters.CustomActionFilterAttribute" />.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Filters.CustomActionFilterAttribute.logger">
+            <summary>
+            Defines the logger..
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Filters.CustomActionFilterAttribute.#ctor(Microsoft.Extensions.Logging.ILogger{ExceptionHandler.Filters.CustomActionFilterAttribute})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Filters.CustomActionFilterAttribute"/> class.
+            </summary>
+            <param name="logger">The logger<see cref="T:Microsoft.Extensions.Logging.ILogger`1" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Filters.CustomActionFilterAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            The OnActionExecuted.
+            </summary>
+            <param name="context">The context<see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Filters.CustomActionFilterAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            The OnActionExecuting.
+            </summary>
+            <param name="context">The context<see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext" />.</param>
+        </member>
+        <member name="T:ExceptionHandler.Middleware.CustomExceptionMiddleware">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Middleware.CustomExceptionMiddleware" />.
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Middleware.CustomExceptionMiddleware.exceptionPolicies">
+            <summary>
+            Defines the exceptionPolicies..
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Middleware.CustomExceptionMiddleware.logger">
+            <summary>
+            Defines the logger..
+            </summary>
+        </member>
+        <member name="F:ExceptionHandler.Middleware.CustomExceptionMiddleware.next">
+            <summary>
+            Defines the next..
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Middleware.CustomExceptionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILoggerFactory,Autofac.Features.Indexed.IIndex{System.String,ExceptionHandler.Policies.Interface.IExceptionHandler})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Middleware.CustomExceptionMiddleware"/> class.
+            </summary>
+            <param name="next">The next<see cref="T:Microsoft.AspNetCore.Http.RequestDelegate" />.</param>
+            <param name="loggerFactory">The loggerFactory<see cref="T:Microsoft.Extensions.Logging.ILoggerFactory" />.</param>
+            <param name="exceptionPolicies">The exceptionPolicies<see cref="T:Autofac.Features.Indexed.IIndex`2" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Middleware.CustomExceptionMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            The InvokeAsync.
+            </summary>
+            <param name="httpContext">The httpContext<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <returns>The <see cref="T:System.Threading.Tasks.Task" />.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Middleware.CustomExceptionMiddleware.HandleUnAuthorizationAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            The HandleUnAuthorizationAsync.
+            </summary>
+            <param name="context">The context<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <returns>The <see cref="T:System.Threading.Tasks.Task" />.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Middleware.CustomExceptionMiddleware.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary>
+            The HandleExceptionAsync.
+            </summary>
+            <param name="context">The context<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <param name="ex">The ex<see cref="T:System.Exception" />.</param>
+            <returns>The <see cref="T:System.Threading.Tasks.Task" />.</returns>
+        </member>
+        <member name="T:ExceptionHandler.Middleware.CustomExceptionMiddlewareExtensions">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Middleware.CustomExceptionMiddlewareExtensions" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Middleware.CustomExceptionMiddlewareExtensions.ConfigureCustomExceptionMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            The ConfigureCustomExceptionMiddleware.
+            </summary>
+            <param name="app">The app<see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
+        </member>
+        <member name="T:ExceptionHandler.Models.Exceptions.AppException">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Models.Exceptions.AppException" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.AppException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.AppException"/> class.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.AppException.#ctor(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.AppException"/> class.
+            </summary>
+            <param name="messagesSummary">The messagesSummary<see cref="T:ExceptionHandler.Models.MessagesSummary" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.AppException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.AppException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.AppException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.AppException"/> class.
+            </summary>
+            <param name="serializationInfo">The serializationInfo<see cref="T:System.Runtime.Serialization.SerializationInfo" />.</param>
+            <param name="streamingContext">The streamingContext<see cref="T:System.Runtime.Serialization.StreamingContext" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.AppException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            The GetObjectData.
+            </summary>
+            <param name="info">The info<see cref="T:System.Runtime.Serialization.SerializationInfo" />.</param>
+            <param name="context">The context<see cref="T:System.Runtime.Serialization.StreamingContext" />.</param>
+        </member>
+        <member name="T:ExceptionHandler.Models.Exceptions.AuthorizationException">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Models.Exceptions.AuthorizationException" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.AuthorizationException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.AuthorizationException"/> class.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.AuthorizationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.AuthorizationException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.AuthorizationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.AuthorizationException"/> class.
+            </summary>
+            <param name="serializationInfo">The serializationInfo<see cref="T:System.Runtime.Serialization.SerializationInfo" />.</param>
+            <param name="streamingContext">The streamingContext<see cref="T:System.Runtime.Serialization.StreamingContext" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.AuthorizationException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            The GetObjectData.
+            </summary>
+            <param name="info">The info<see cref="T:System.Runtime.Serialization.SerializationInfo" />.</param>
+            <param name="context">The context<see cref="T:System.Runtime.Serialization.StreamingContext" />.</param>
+        </member>
+        <member name="T:ExceptionHandler.Models.Exceptions.ConnectionException">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Models.Exceptions.ConnectionException" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.ConnectionException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.ConnectionException"/> class.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.ConnectionException.#ctor(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.ConnectionException"/> class.
+            </summary>
+            <param name="messagesSummary">The messagesSummary<see cref="T:ExceptionHandler.Models.MessagesSummary" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.ConnectionException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.ConnectionException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.ConnectionException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.ConnectionException"/> class.
+            </summary>
+            <param name="serializationInfo">The serializationInfo<see cref="T:System.Runtime.Serialization.SerializationInfo" />.</param>
+            <param name="streamingContext">The streamingContext<see cref="T:System.Runtime.Serialization.StreamingContext" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.ConnectionException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            The GetObjectData.
+            </summary>
+            <param name="info">The info<see cref="T:System.Runtime.Serialization.SerializationInfo" />.</param>
+            <param name="context">The context<see cref="T:System.Runtime.Serialization.StreamingContext" />.</param>
+        </member>
+        <member name="T:ExceptionHandler.Models.Exceptions.NotFoundException">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Models.Exceptions.NotFoundException" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.NotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.NotFoundException"/> class.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.NotFoundException.#ctor(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.NotFoundException"/> class.
+            </summary>
+            <param name="messagesSummary">The messagesSummary<see cref="T:ExceptionHandler.Models.MessagesSummary" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.NotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.NotFoundException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.NotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.NotFoundException"/> class.
+            </summary>
+            <param name="serializationInfo">The serializationInfo<see cref="T:System.Runtime.Serialization.SerializationInfo" />.</param>
+            <param name="streamingContext">The streamingContext<see cref="T:System.Runtime.Serialization.StreamingContext" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.NotFoundException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            The GetObjectData.
+            </summary>
+            <param name="info">The info<see cref="T:System.Runtime.Serialization.SerializationInfo" />.</param>
+            <param name="context">The context<see cref="T:System.Runtime.Serialization.StreamingContext" />.</param>
+        </member>
+        <member name="T:ExceptionHandler.Models.Exceptions.SanitizationException">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Models.Exceptions.SanitizationException" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.SanitizationException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.SanitizationException"/> class.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.SanitizationException.#ctor(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.SanitizationException"/> class.
+            </summary>
+            <param name="messagesSummary">The messagesSummary<see cref="T:ExceptionHandler.Models.MessagesSummary" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.SanitizationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.SanitizationException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.SanitizationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Exceptions.SanitizationException"/> class.
+            </summary>
+            <param name="serializationInfo">The serializationInfo<see cref="T:System.Runtime.Serialization.SerializationInfo" />.</param>
+            <param name="streamingContext">The streamingContext<see cref="T:System.Runtime.Serialization.StreamingContext" />.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Exceptions.SanitizationException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            The GetObjectData.
+            </summary>
+            <param name="info">The info<see cref="T:System.Runtime.Serialization.SerializationInfo" />.</param>
+            <param name="context">The context<see cref="T:System.Runtime.Serialization.StreamingContext" />.</param>
+        </member>
+        <member name="T:ExceptionHandler.Models.Message">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Models.Message" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Message.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Message"/> class.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Message.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.Message"/> class.
+            </summary>
+            <param name="code">The Code.</param>
+            <param name="title">The title.</param>
+            <param name="text">The text.</param>
+            <param name="messageIndicatorTypes">The Message Indicator Type.</param>
+        </member>
+        <member name="P:ExceptionHandler.Models.Message.Title">
+            <summary>
+            Gets or sets the Title
+            Gets or sets the Title..
+            </summary>
+        </member>
+        <member name="P:ExceptionHandler.Models.Message.Text">
+            <summary>
+            Gets or sets the Text
+            Gets or sets the Text..
+            </summary>
+        </member>
+        <member name="P:ExceptionHandler.Models.Message.Code">
+            <summary>
+            Gets or sets the Code
+            Gets or sets the Code..
+            </summary>
+        </member>
+        <member name="P:ExceptionHandler.Models.Message.Source">
+            <summary>
+            Gets or sets the Source
+            Gets or sets the Source..
+            </summary>
+        </member>
+        <member name="P:ExceptionHandler.Models.Message.MessageIndicatorType">
+            <summary>
+            Gets or sets the MessageIndicatorType
+            Gets or sets the MessageIndicatorType..
+            </summary>
+        </member>
+        <member name="P:ExceptionHandler.Models.Message.MessageDisplayType">
+            <summary>
+            Gets or sets the MessageDisplayType
+            Gets or sets the MessageDisplayType..
+            </summary>
+        </member>
+        <member name="T:ExceptionHandler.Models.Extensions.MessageExtensions">
+            <summary>
+            Message Summary Extensions.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageExtensions.HasInformation(System.Collections.Generic.List{ExceptionHandler.Models.Message})">
+            <summary>
+            Determines whether the specified messages has information.
+            </summary>
+            <param name="messages">The messages.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageExtensions.HasWarning(System.Collections.Generic.List{ExceptionHandler.Models.Message})">
+            <summary>
+            Determines whether the specified messages has warning.
+            </summary>
+            <param name="messages">The messages.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageExtensions.ErrorsCount(System.Collections.Generic.List{ExceptionHandler.Models.Message})">
+            <summary>
+            Errorses the count.
+            </summary>
+            <param name="messages">The messages.</param>
+            <returns>Error count.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageExtensions.HasErrors(System.Collections.Generic.List{ExceptionHandler.Models.Message})">
+            <summary>
+            Determines whether the specified messages has errors.
+            </summary>
+            <param name="messages">The messages.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageExtensions.GetErrorMessages(System.Collections.Generic.List{ExceptionHandler.Models.Message})">
+            <summary>
+            Gets the error messages.
+            </summary>
+            <param name="messages">The messages.</param>
+            <returns>The list of messages.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageExtensions.GetWarningMessages(System.Collections.Generic.List{ExceptionHandler.Models.Message})">
+            <summary>
+            Gets the warning messages.
+            </summary>
+            <param name="messages">The messages.</param>
+            <returns>The list of messages.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageExtensions.GetInformationMessages(System.Collections.Generic.List{ExceptionHandler.Models.Message})">
+            <summary>
+            Gets the information messages.
+            </summary>
+            <param name="messages">The messages.</param>
+            <returns>The list of messages.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageExtensions.GetMessagesOfType(System.Collections.Generic.List{ExceptionHandler.Models.Message},ExceptionHandler.Enumeration.MessageIndicatorTypes)">
+            <summary>
+            Gets the type of the messages of.
+            </summary>
+            <param name="messages">The messages.</param>
+            <param name="messageTypeIndicator">The message type indicator.</param>
+            <returns>The list of messages.</returns>
+        </member>
+        <member name="T:ExceptionHandler.Models.Extensions.MessageSummaryExtensions">
+            <summary>
+            Message Summary Extensions.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageSummaryExtensions.HasInformation(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Determines whether the specified messages summary has information.
+            </summary>
+            <param name="messagesSummary">The messages summary.</param>
+            <returns>
+              <c>true</c> if the specified messages summary has information; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageSummaryExtensions.HasWarning(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Determines whether the specified messages summary has warning.
+            </summary>
+            <param name="messagesSummary">The messages summary.</param>
+            <returns>
+              <c>true</c> if the specified messages summary has warning; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageSummaryExtensions.ErrorsCount(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Errorses the count.
+            </summary>
+            <param name="messagesSummary">The messages summary.</param>
+            <returns>Error count.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageSummaryExtensions.HasErrors(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Determines whether the specified messages summary has errors.
+            </summary>
+            <param name="messagesSummary">The messages summary.</param>
+            <returns>
+              <c>true</c> if the specified messages summary has errors; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageSummaryExtensions.GetErrorMessages(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Gets the error messages.
+            </summary>
+            <param name="messagesSummary">The messages summary.</param>
+            <returns>list of error messages.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageSummaryExtensions.GetWarningMessages(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Gets the warning messages.
+            </summary>
+            <param name="messagesSummary">The messages summary.</param>
+            <returns>list of messages.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageSummaryExtensions.GetInformationMessages(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Gets the information messages.
+            </summary>
+            <param name="messagesSummary">The messages summary.</param>
+            <returns>list of messages.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageSummaryExtensions.GetMessagesOfType(ExceptionHandler.Models.MessagesSummary,ExceptionHandler.Enumeration.MessageIndicatorTypes)">
+            <summary>
+            Gets the type of the messages of.
+            </summary>
+            <param name="messagesSummary">The messages summary.</param>
+            <param name="messageTypeIndicator">The message type indicator.</param>
+            <returns>list of messages.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageSummaryExtensions.ContainsMinMaxOrPolicyChangeError(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Determines whether messages summary contains any mininum/maximum group size or policy error.
+            </summary>
+            <param name="messagesSummary">The messages summary.</param>
+            <returns><c>true</c> if contains such errors, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageSummaryExtensions.ContainsMaxNumberIfTicketReissuesError(ExceptionHandler.Models.MessagesSummary)">
+            <summary>
+            Determines whether any messages contain error code for max number of ticket reissues.
+            </summary>
+            <param name="messagesSummary">The messages summary.</param>
+            <returns><c>true</c> if contains such error code, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageSummaryExtensions.ClearAllMessages(ExceptionHandler.Models.MessagesSummary,System.String[])">
+            <summary>
+            Clears all messages.
+            </summary>
+            <param name="messagesSummary">The messages summary.</param>
+            <param name="codeExceptions">The code exceptions.</param>
+        </member>
+        <member name="M:ExceptionHandler.Models.Extensions.MessageSummaryExtensions.AddMessage(ExceptionHandler.Models.MessagesSummary,ExceptionHandler.Models.Message)">
+            <summary>
+            Add message to message summary.
+            </summary>
+            <param name="messagesSummary">The message summary.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="T:ExceptionHandler.Models.MessagesSummary">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Models.MessagesSummary" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.MessagesSummary.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExceptionHandler.Models.MessagesSummary"/> class.
+            </summary>
+        </member>
+        <member name="P:ExceptionHandler.Models.MessagesSummary.StatusCode">
+            <summary>
+            Gets or sets the StatusCode
+            Gets or sets the StatusCode..
+            </summary>
+        </member>
+        <member name="P:ExceptionHandler.Models.MessagesSummary.Type">
+            <summary>
+            Gets or sets the Type
+            Gets or sets the Type..
+            </summary>
+        </member>
+        <member name="P:ExceptionHandler.Models.MessagesSummary.TraceId">
+            <summary>
+            Gets or sets the TraceId
+            Gets or sets the TraceId..
+            </summary>
+        </member>
+        <member name="P:ExceptionHandler.Models.MessagesSummary.Messages">
+            <summary>
+            Gets or sets the Messages
+            Gets or sets the Messages..
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Models.MessagesSummary.ToString">
+            <summary>
+            The ToString.
+            </summary>
+            <returns>The <see cref="T:System.String" />.</returns>
+        </member>
+        <member name="T:ExceptionHandler.Models.Response">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Models.Response" />.
+            </summary>
+        </member>
+        <member name="P:ExceptionHandler.Models.Response.MessagesSummary">
+            <summary>
+            Gets or sets the MessagesSummary
+            Gets or sets the MessagesSummary..
+            </summary>
+        </member>
+        <member name="T:ExceptionHandler.Policies.Implementations.AdminExceptionPolicy">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Policies.Implementations.AdminExceptionPolicy" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Policies.Implementations.AdminExceptionPolicy.ExecutePolicy(System.Exception,Microsoft.AspNetCore.Http.HttpContext,System.Boolean,System.String)">
+            <summary>
+            The ExecutePolicy.
+            </summary>
+            <param name="ex">The ex<see cref="T:System.Exception" />.</param>
+            <param name="httpContext">The httpContext<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <param name="isHandledException">The isHandledException<see cref="T:System.Boolean" />.</param>
+            <param name="genericMessage">The genericMessage<see cref="T:System.String" />.</param>
+            <returns>The <see cref="T:ExceptionHandler.Models.MessagesSummary" />.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Policies.Implementations.AdminExceptionPolicy.PopulateMessages(System.Exception,Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            The PopulateMessages.
+            </summary>
+            <param name="ex">The ex<see cref="T:System.Exception" />.</param>
+            <param name="httpContext">The httpContext<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <param name="genericMessage">The genericMessage<see cref="T:System.String" />.</param>
+            <returns>The <see cref="T:System.Collections.Generic.List`1" />.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Policies.Implementations.AdminExceptionPolicy.UpdateMessagesCodeByExceptionType(Microsoft.AspNetCore.Http.HttpContext,ExceptionHandler.Models.MessagesSummary,System.String)">
+            <summary>
+            The UpdateMessagesCodeByExceptionType.
+            </summary>
+            <param name="httpContext">The httpContext<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <param name="messagesSummary">The messagesSummary<see cref="T:ExceptionHandler.Models.MessagesSummary" />.</param>
+            <param name="genericMessage">The genericMessage<see cref="T:System.String" />.</param>
+            <returns>The <see cref="T:ExceptionHandler.Models.MessagesSummary" />.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Policies.Implementations.AdminExceptionPolicy.MyRegex">
+            <remarks>
+            Pattern explanation:<br/>
+            <code>
+            ○ Match a whitespace character.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="T:ExceptionHandler.Policies.Implementations.ClientExceptionPolicy">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Policies.Implementations.ClientExceptionPolicy" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Policies.Implementations.ClientExceptionPolicy.ExecutePolicy(System.Exception,Microsoft.AspNetCore.Http.HttpContext,System.Boolean,System.String)">
+            <summary>
+            The ExecutePolicy.
+            </summary>
+            <param name="ex">The ex<see cref="T:System.Exception" />.</param>
+            <param name="httpContext">The httpContext<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <param name="isHandledException">The isHandledException<see cref="T:System.Boolean" />.</param>
+            <param name="genericMessage">The genericMessage<see cref="T:System.String" />.</param>
+            <returns>The <see cref="T:ExceptionHandler.Models.MessagesSummary" />.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Policies.Implementations.ClientExceptionPolicy.PopulateMessages(System.Exception,Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            The PopulateMessages.
+            </summary>
+            <param name="ex">The ex<see cref="T:System.Exception" />.</param>
+            <param name="httpContext">The httpContext<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <param name="genericMessage">The genericMessage<see cref="T:System.String" />.</param>
+            <returns>The <see cref="T:System.Collections.Generic.List`1" />.</returns>
+        </member>
+        <member name="M:ExceptionHandler.Policies.Implementations.ClientExceptionPolicy.UpdateMessagesCodeByExceptionType(Microsoft.AspNetCore.Http.HttpContext,ExceptionHandler.Models.MessagesSummary,System.String)">
+            <summary>
+            The UpdateMessagesCodeByExceptionType.
+            </summary>
+            <param name="httpContext">The httpContext<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <param name="messagesSummary">The messagesSummary<see cref="T:ExceptionHandler.Models.MessagesSummary" />.</param>
+            <param name="genericMessage">The genericMessage<see cref="T:System.String" />.</param>
+            <returns>The <see cref="T:ExceptionHandler.Models.MessagesSummary" />.</returns>
+        </member>
+        <member name="T:ExceptionHandler.Policies.Interface.IExceptionHandler">
+            <summary>
+            Defines the <see cref="T:ExceptionHandler.Policies.Interface.IExceptionHandler" />.
+            </summary>
+        </member>
+        <member name="M:ExceptionHandler.Policies.Interface.IExceptionHandler.ExecutePolicy(System.Exception,Microsoft.AspNetCore.Http.HttpContext,System.Boolean,System.String)">
+            <summary>
+            The ExecutePolicy.
+            </summary>
+            <param name="ex">The ex<see cref="T:System.Exception" />.</param>
+            <param name="httpContext">The httpContext<see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+            <param name="isHandledException">The isHandledException<see cref="T:System.Boolean" />.</param>
+            <param name="genericMessage">The genericMessage<see cref="T:System.String" />.</param>
+            <returns>The <see cref="T:ExceptionHandler.Models.MessagesSummary" />.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.MyRegex_0">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the MyRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.MyRegex_0.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MyRegex_0.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.MyRegex_0.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MyRegex_0.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.MyRegex_0.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MyRegex_0.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MyRegex_0.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Utilities">
+            <summary>Helper methods used by generated <see cref="T:System.Text.RegularExpressions.Regex"/>-derived implementations.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout">
+            <summary>Default timeout value set in <see cref="T:System.AppContext"/>, or <see cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout"/> if none was set.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
+            <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
+        </member>
+    </members>
+</doc>

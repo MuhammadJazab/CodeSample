@@ -1,0 +1,386 @@
+<!-- sidebar -->
+<div class="sidebar px-4 py-4 py-md-5 me-0 shadow-lg">
+  <div class="d-flex flex-column h-100">
+    <a routerLink="/hr" class="mb-0 brand-icon">
+      <span class="logo-icon">
+        <img src="assets/images/logo/butt-logo.png" width="60" height="60" />
+      </span>
+      <span class="logo-text">Butt's ERP</span>
+    </a>
+    <!-- Menu: main ul -->
+
+    <ul class="menu-list flex-grow-1 mt-3">
+      <!--HR Dashboard -->
+      <li class="collapsed">
+        <a
+          class="m-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#hrdashboard"
+          href=""
+        >
+          <i class="icofont-home fs-5"></i> <span>HR Dashboard</span>
+          <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span
+        ></a>
+        <!-- Menu: Sub menu ul -->
+        <ul class="sub-menu collapse" id="hrdashboard">
+          <li class="collapsed">
+            <a
+              class="m-link active"
+              data-bs-toggle="collapse"
+              data-bs-target="#attendance"
+              href=""
+              ><i class="icofont-tasks-alt"></i> <span>Attendance</span>
+              <span
+                class="arrow icofont-dotted-down ms-auto text-end fs-5"
+              ></span
+            ></a>
+            <!-- Menu: Sub menu ul -->
+            <ul class="sub-menu collapse" id="attendance">
+              <!-- <li>
+                <a class="ms-link" href="/members"> <span>Members</span></a>
+              </li>
+              <li>
+                <a class="ms-link" href="/employee-profile">
+                  <span>Members Profile</span></a
+                >
+              </li> -->
+              <li>
+                <a class="ms-link" href="/attendance-employees">
+                  <span>Attendance Employees</span></a
+                >
+              </li>
+              <li>
+                <a class="ms-link" href="/attendance">
+                  <span>Attendance</span></a
+                >
+              </li>
+              <li>
+                <a class="ms-link" href="/holidays"> <span>Holidays</span></a>
+              </li>
+
+              <li>
+                <a class="ms-link" href="/leave-request">
+                  <span>Leave Request</span></a
+                >
+              </li>
+            </ul>
+          </li>
+          <li class="collapsed">
+            <a
+              class="m-link"
+              data-bs-toggle="collapse"
+              data-bs-target="#resignation"
+              href=""
+              ><i class="icofont-paper"></i> <span>Resignation</span>
+              <span
+                class="arrow icofont-dotted-down ms-auto text-end fs-5"
+              ></span
+            ></a>
+            <!-- Menu: Sub menu ul -->
+            <ul class="sub-menu collapse" id="resignation">
+              <li>
+                <a class="ms-link" href="/resign"> <span>Resign</span></a>
+              </li>
+              <li>
+                <a class="ms-link" href="/final-statement">
+                  <span>Final Statement</span></a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <!-- Project -->
+      <!-- <li class="collapsed">
+        <a
+          class="m-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#projects"
+          href=""
+        >
+          <i class="icofont-briefcase"></i><span>Projects</span>
+          <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span
+        ></a> -->
+      <!-- Menu: Sub menu ul -->
+      <!-- <ul class="sub-menu collapse" id="projects">
+          <li>
+            <a class="ms-link" href="/projects"><span>Projects</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/tasks"><span>Tasks</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/timesheets"><span>Timesheet</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/team-leaders"><span>Leaders</span></a>
+          </li>
+        </ul>
+      </li> -->
+      <!-- Tickets -->
+      <!-- <li class="collapsed">
+        <a
+          class="m-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#tickets"
+          href=""
+          ><i class="icofont-ticket"></i> <span>Tickets</span>
+          <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span
+        ></a> -->
+      <!-- Menu: Sub menu ul -->
+      <!-- <ul class="sub-menu collapse" id="tickets">
+          <li>
+            <a class="ms-link" href="/tickets"> <span>Tickets View</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/ticket-detail">
+              <span>Ticket Detail</span></a
+            >
+          </li>
+        </ul>
+      </li> -->
+      <!-- Our Clients -->
+      <!-- <li class="collapsed">
+        <a
+          class="m-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#our-clients"
+          href=""
+          ><i class="icofont-user-male"></i> <span>Our Clients</span>
+          <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span
+        ></a> -->
+      <!-- Menu: Sub menu ul -->
+      <!-- <ul class="sub-menu collapse" id="our-clients">
+          <li>
+            <a class="ms-link" href="/ourclients"> <span>Clients</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/cprofile"> <span>Client Profile</span></a>
+          </li>
+        </ul>
+      </li> -->
+      <!--Employees-->
+      <!-- <li class="collapsed">
+        <a
+          class="m-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#employees"
+          href=""
+          ><i class="icofont-users-alt-5"></i> <span>Employees</span>
+          <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span
+        ></a> -->
+      <!-- Menu: Sub menu ul -->
+      <!-- <ul class="sub-menu collapse" id="employees">
+          <li>
+            <a class="ms-link" href="/members"> <span>Members</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/employee-profile">
+              <span>Members Profile</span></a
+            >
+          </li>
+          <li>
+            <a class="ms-link" href="/holidays"> <span>Holidays</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/attendance-employees">
+              <span>Attendance Employees</span></a
+            >
+          </li>
+          <li>
+            <a class="ms-link" href="/attendance"> <span>Attendance</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/leave-request">
+              <span>Leave Request</span></a
+            >
+          </li>
+          <li>
+            <a class="ms-link" href="/department"> <span>Department</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/loan"> <span>Loan</span></a>
+          </li>
+        </ul> 
+      </li>-->
+      <!-- Accounts -->
+      <!-- <li class="collapsed">
+        <a
+          class="m-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#accounts"
+          href=""
+          ><i class="icofont-ui-calculator"></i> <span>Accounts</span>
+          <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span
+        ></a> -->
+      <!-- Menu: Sub menu ul -->
+      <!-- <ul class="sub-menu collapse" id="accounts">
+          <li>
+            <a class="ms-link" href="/invoices"><span>Invoices</span> </a>
+          </li>
+          <li>
+            <a class="ms-link" href="/payments"><span>Payments</span> </a>
+          </li>
+          <li>
+            <a class="ms-link" href="/expenses"><span>Expenses</span> </a>
+          </li>
+          <li>
+            <a class="ms-link" href="/create-invoice"
+              ><span>Create Invoice</span>
+            </a>
+          </li>
+        </ul>
+      </li> -->
+      <!-- Payroll -->
+      <!-- <li class="collapsed">
+        <a
+          class="m-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#payroll"
+          href=""
+          ><i class="icofont-users-alt-5"></i> <span>Payroll</span>
+          <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span
+        ></a> -->
+      <!-- Menu: Sub menu ul -->
+      <!-- <ul class="sub-menu collapse" id="payroll">
+          <li>
+            <a class="ms-link" href="/salaryslip"
+              ><span>Employee Salary</span>
+            </a>
+          </li>
+        </ul>
+      </li> -->
+      <!-- App -->
+      <!-- <li class="collapsed">
+        <a
+          class="m-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#app"
+          href=""
+        >
+          <i class="icofont-contrast"></i> <span>App</span>
+          <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span
+        ></a> -->
+      <!-- Menu: Sub menu ul -->
+      <!-- <ul class="sub-menu collapse" id="app">
+          <li>
+            <a class="ms-link" href="/calendar"> <span>Calander</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/chat"><span>Chat App</span></a>
+          </li>
+        </ul>
+      </li> -->
+      <!-- Other Pages -->
+      <!-- <li class="collapsed">
+         <a
+          class="m-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#pages"
+          href=""
+        >
+          <i class="icofont-code-alt"></i> <span>Other Pages</span>
+          <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span
+        ></a> -->
+      <!-- Menu: Sub menu ul -->
+      <!-- <ul class="sub-menu collapse" id="pages">
+          <li>
+            <a class="ms-link" href="/charts"> <span>Apex Charts</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/forms"><span>Forms Example</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/table"> <span>Table Example</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/review"><span>Reviews Page</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/icon"><span>Icons</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/contact"><span>Contact</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/widgets"><span>Widgets</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/todo-list"><span>Todo-List</span></a>
+          </li>
+        </ul>
+      </li> -->
+      <!-- Authentication -->
+      <!-- <li class="collapsed">
+        <a
+          class="m-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#menu-Authentication"
+          href="#"
+          ><i class="icofont-ui-lock"></i> <span>Authentication</span>
+          <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span
+        ></a> -->
+      <!-- Menu: Sub menu ul -->
+      <!-- <ul class="sub-menu collapse" id="menu-Authentication">
+          <li>
+            <a class="ms-link" href="/auth-signin"><span>Sign in</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/auth-signup"><span>Sign up</span></a>
+          </li>
+          <li>
+            <a class="ms-link" href="/auth-password-reset"
+              ><span>Password reset</span></a
+            >
+          </li>
+          <li>
+            <a class="ms-link" href="/auth-two-step"
+              ><span>2-Step Authentication</span></a
+            >
+          </li>
+          <li>
+            <a class="ms-link" href="/auth-404"><span>404</span></a>
+          </li>
+        </ul>
+      </li> -->
+      <!-- Starter Page -->
+      <!-- <li>
+        <a class="m-link" href="/starter-page"
+          ><i class="icofont-code"></i> <span>Stater page</span></a
+        >
+      </li> -->
+      <!-- Changelog -->
+      <!-- <li>
+        <a class="m-link" href="/changelog"
+          ><i class="icofont-edit"></i> <span>Changelog</span>
+          <span class="ms-auto small-14 fw-bold">v1.1.5</span></a
+        >
+      </li> -->
+    </ul>
+
+    <!-- Theme: Switch Theme -->
+    <ul class="list-unstyled mb-0">
+      <li class="d-flex align-items-center justify-content-center">
+        <div class="form-check form-switch theme-switch">
+          <input class="form-check-input" type="checkbox" id="" />
+          <label class="form-check-label" for="theme-switch"
+            >Enable Dark Mode!</label
+          >
+        </div>
+      </li>
+      <li class="d-flex align-items-center justify-content-center">
+        <div class="form-check form-switch theme-rtl">
+          <input class="form-check-input" type="checkbox" id="theme-rtl" />
+          <label class="form-check-label" for="theme-rtl"
+            >Enable RTL Mode!</label
+          >
+        </div>
+      </li>
+    </ul>
+
+    <!-- Menu: menu collepce btn -->
+    <button type="button" class="btn btn-link sidebar-mini-btn text-light">
+      <span class="ms-2"><i class="icofont-bubble-right"></i></span>
+    </button>
+  </div>
+</div>

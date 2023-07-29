@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<WarningsAsErrors>0219,CS0168</WarningsAsErrors>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<IsPackable>false</IsPackable>
+		<AnalysisLevel>latest</AnalysisLevel>
+		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Azure.Messaging.ServiceBus" Version="7.14.0" />
+		<PackageReference Include="coverlet.msbuild" Version="6.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+		<PackageReference Include="Moq" Version="4.18.4" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.0.3" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.0.3" />
+		<PackageReference Include="coverlet.collector" Version="6.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="ReportGenerator" Version="5.1.21" />
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="9.1.0.70676">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\EventBusServiceBus\EventBusServiceBus.csproj" />
+	  <ProjectReference Include="..\..\EventBus.Test.Core\EventBus.Test.Core.csproj" />
+	</ItemGroup>
+</Project>
