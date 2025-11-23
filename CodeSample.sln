@@ -33,6 +33,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SystemExtensions", "SystemE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTelemetryExtension", "SystemExtensions\OpenTelemetryExtension\OpenTelemetryExtension.csproj", "{599C34BF-8095-4033-BC45-1BE919F7FB2B}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "observability", "observability", "{335AFD88-2E70-4C64-AF04-9E270700276D}"
+	ProjectSection(SolutionItems) = preProject
+		observability\grafana\dashboards\dashboard.yml = observability\grafana\dashboards\dashboard.yml
+		observability\loki-config.yaml = observability\loki-config.yaml
+		observability\otel-collector-config.yaml = observability\otel-collector-config.yaml
+		observability\prometheus.yml = observability\prometheus.yml
+		observability\tempo-config.yaml = observability\tempo-config.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dashboards", "dashboards", "{8648E0A6-F008-4B92-BF05-88441606DA19}"
+	ProjectSection(SolutionItems) = preProject
+		observability\grafana\dashboards\dashboard.yml = observability\grafana\dashboards\dashboard.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grafana", "grafana", "{E8298D45-0CF8-4055-A8AC-D0280DD5F5A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "datasources", "datasources", "{7516F2AD-03B1-4C43-9A56-8CC1F0D38776}"
+	ProjectSection(SolutionItems) = preProject
+		observability\grafana\datasources\datasources.yml = observability\grafana\datasources\datasources.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +98,10 @@ Global
 		{599C34BF-8095-4033-BC45-1BE919F7FB2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{599C34BF-8095-4033-BC45-1BE919F7FB2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{599C34BF-8095-4033-BC45-1BE919F7FB2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +119,9 @@ Global
 		{B986DDA9-7D34-45DD-A29B-775C12CCD39A} = {61FDE986-5B69-4896-927A-29882A7816C2}
 		{1B87D48D-6C18-4030-B598-F1B78A175204} = {C85AEF2C-027F-44E7-899D-C8C9563D9D3C}
 		{599C34BF-8095-4033-BC45-1BE919F7FB2B} = {FF535AF4-B15B-4357-9B51-E293EBEA74E8}
+		{8648E0A6-F008-4B92-BF05-88441606DA19} = {E8298D45-0CF8-4055-A8AC-D0280DD5F5A7}
+		{E8298D45-0CF8-4055-A8AC-D0280DD5F5A7} = {335AFD88-2E70-4C64-AF04-9E270700276D}
+		{7516F2AD-03B1-4C43-9A56-8CC1F0D38776} = {E8298D45-0CF8-4055-A8AC-D0280DD5F5A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E0148AB-FBDB-4C86-B0EC-D201E2D70C2C}

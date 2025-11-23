@@ -1,0 +1,123 @@
+version: '3.8'
+
+services:
+  # Database services
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: "YourStrong!Passw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    networks:
+      - microservices
+
+  # Message broker
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - microservices
+
+  # Gateway API
+  gateway-api:
+    build:
+      context: .
+      dockerfile: Gateway/Gateway.Api/Dockerfile
+    container_name: gateway-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8081
+      - OpenTelemetry__OtlpEndpoint=http://otel-collector:4317
+    ports:
+      - "8081:8081"
+    depends_on:
+      - otel-collector
+    networks:
+      - microservices
+      - observability
+
+  # User API
+  user-api:
+    build:
+      context: .
+      dockerfile: Services/UserService/User.Api/Dockerfile
+    container_name: user-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=UserServiceDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=true
+      - OpenTelemetry__OtlpEndpoint=http://otel-collector:4317
+      - MassTransit__RabbitMQ__Host=rabbitmq
+    ports:
+      - "5001:5001"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+      - otel-collector
+    networks:
+      - microservices
+      - observability
+
+  # Order API
+  order-api:
+    build:
+      context: .
+      dockerfile: Services/OrderService/Order.Api/Dockerfile
+    container_name: order-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5002
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=OrderServiceDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=true
+      - OpenTelemetry__OtlpEndpoint=http://otel-collector:4317
+      - MassTransit__RabbitMQ__Host=rabbitmq
+    ports:
+      - "5002:5002"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+      - otel-collector
+    networks:
+      - microservices
+      - observability
+
+  # Notification API
+  notification-api:
+    build:
+      context: .
+      dockerfile: Services/NotificationService/Notification.Api/Dockerfile
+    container_name: notification-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5003
+      - OpenTelemetry__OtlpEndpoint=http://otel-collector:4317
+      - RabbitMQ__HostName=rabbitmq
+    ports:
+      - "5003:5003"
+    depends_on:
+      - rabbitmq
+      - otel-collector
+    networks:
+      - microservices
+      - observability
+
+volumes:
+  sqlserver-data:
+  rabbitmq-data:
+
+networks:
+  microservices:
+    driver: bridge
+  observability:
+    external: true
