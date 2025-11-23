@@ -5,12 +5,15 @@ var corsPolicy = "CorsPolicy";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddUserDbContext(builder.Configuration);
 builder.Services.ConfigureInfrastructureServices(builder.Configuration);
 builder.ConfigureAutoFacContainer();
 builder.Services.ConfigureApplicationServices();
 builder.Services.AddSwaggerGen();
 builder.AddSwaggerDoc();
+
+// Add OpenTelemetry
+builder.AddOpenTelemetryExtension();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -46,7 +49,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.SeedUserApiData();
 
-[ExcludeFromCodeCoverage]
-public static partial class Program { }
+app.MapPrometheusScrapingEndpoint();
+
+app.Run();

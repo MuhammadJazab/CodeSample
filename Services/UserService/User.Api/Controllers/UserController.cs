@@ -1,22 +1,20 @@
 ﻿
-//file="AccountController.cs" >
+//file="UserController.cs" >
 
 namespace User.Api.Controllers;
 
 /// <summary>
-/// Defines the <see cref="AccountController" />.
+/// Defines the <see cref="UserController" />.
 /// </summary>
-[Route("api/[controller]")]
+/// <remarks>
+/// Initializes a new instance of the <see cref="UserController"/> class.
+/// </remarks>
+/// <param name="loginService">The login service.</param>
 [ApiController]
-public class AccountController : BaseController<AccountController>
+[Route("api/[controller]")]
+public class UserController(IMediator mediator, ILogger<UserController> logger, IHttpContextAccessor httpContextAccessor)
+    : BaseController<UserController>(mediator, logger, httpContextAccessor)
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="AccountController"/> class.
-    /// </summary>
-    /// <param name="loginService">The login service.</param>
-    public AccountController(IMediator mediator, ILogger<AccountController> logger, IHttpContextAccessor httpContextAccessor)
-        : base(mediator, logger, httpContextAccessor)
-    { }
 
     /// <summary>
     /// Get Users.

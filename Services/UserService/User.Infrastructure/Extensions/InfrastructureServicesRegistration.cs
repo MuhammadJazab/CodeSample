@@ -9,22 +9,16 @@ namespace User.Infrastructure.Extensions;
 [ExcludeFromCodeCoverage]
 public static class InfrastructureServicesRegistration
 {
-    /// <summary>
-    /// The ConfigureInfrastructureServices.
-    /// </summary> 
-    /// <param name="services">The services<see cref="IServiceCollection"/>.</param>
-    /// <param name="configuration">The configuration<see cref="IConfiguration"/>.</param>
-    /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static IServiceCollection ConfigureInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
-        services.AddIdentity<ApplicationUser, IdentityRole>()
-                 .AddUserStore<UserStore<ApplicationUser>>()
-                 .AddRoleStore<RoleStore<IdentityRole>>()
-                 .AddRoleManager<RoleManager<IdentityRole>>()
-                     .AddDefaultTokenProviders();
-
+        services.AddIdentity<ApplicationUser, ApplicationRole>()
+                 .AddUserStore<UserStore<ApplicationUser, ApplicationRole, UserDbContext, Guid>>()
+                 .AddRoleStore<RoleStore<ApplicationRole, UserDbContext, Guid>>()
+                 .AddRoleManager<RoleManager<ApplicationRole>>()
+                 .AddEntityFrameworkStores<UserDbContext>()
+                 .AddDefaultTokenProviders();
 
         services.AddAuthentication(options =>
         {

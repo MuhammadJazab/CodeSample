@@ -25,7 +25,7 @@ public class GenericRepository<T> : IGenericRepository<T>
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericRepository{T}"/> class.
     /// </summary>
-    /// <param name="context">The context<see cref="IAuthenticationDbContext"/>.</param>
+    /// <param name="context">The context<see cref="IUserDbContext"/>.</param>
     public GenericRepository(IOrderDbContext context)
     {
         this.context = context;

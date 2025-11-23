@@ -6,6 +6,7 @@ global using MassTransit;
 global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.OpenApi;
+global using OpenTelemetryExtension;
 global using System.Diagnostics.CodeAnalysis;
 global using System.IdentityModel.Tokens.Jwt;
 global using System.Security.Claims;

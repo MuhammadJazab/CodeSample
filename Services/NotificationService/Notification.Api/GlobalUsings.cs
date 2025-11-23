@@ -2,6 +2,7 @@
 
 global using Notification.Api.IntegrationEvents.EventHandlers;
 global using Notification.Api.IntegrationEvents.Events;
+global using OpenTelemetryExtension;
 global using RabbitMQ.Client;
 global using RabbitMQ.Client.Events;
 global using System.Text;

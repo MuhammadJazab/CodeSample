@@ -17,11 +17,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureInfrastructureServices(builder.Configuration);
 
-builder.Services.AddOpenTelemetry()
-    .WithTracing(builder => builder
-            .AddAspNetCoreInstrumentation().AddConsoleExporter())
-    .WithMetrics(builder => builder
-            .AddAspNetCoreInstrumentation().AddConsoleExporter());
+// Add OpenTelemetry
+builder.AddOpenTelemetryExtension();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -50,6 +47,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.MapPrometheusScrapingEndpoint();
 
 app.MapControllers();
 

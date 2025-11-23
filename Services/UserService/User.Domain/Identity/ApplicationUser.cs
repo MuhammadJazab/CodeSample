@@ -6,7 +6,7 @@ namespace User.Domain.Identity;
 /// Defines the <see cref="ApplicationUser" />.
 /// </summary>
 [ExcludeFromCodeCoverage]
-public class ApplicationUser : IdentityUser
+public class ApplicationUser : IdentityUser<Guid>
 {
     /// <summary>
     /// Gets or sets the FirstName.
