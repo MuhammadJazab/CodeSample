@@ -117,7 +117,7 @@ public sealed class Message
     /// <summary>
     /// Gets or sets the Source.
     /// </summary>
-    [System.Text.Json.Serialization.JsonIgnore] 
+    [System.Text.Json.Serialization.JsonIgnore]
     public string Source { get; set; } = string.Empty;
 
     /// <summary>

@@ -11,7 +11,7 @@ public class OrderRequest
     /// Gets or sets the CustomerId.
     /// </summary>
     public Guid CustomerId { get; set; }
-    
+
     /// <summary>
     /// Gets or sets the ProductId.
     /// </summary>

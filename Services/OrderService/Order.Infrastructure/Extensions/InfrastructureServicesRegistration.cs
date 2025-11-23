@@ -1,5 +1,4 @@
-﻿
-//file="InfrastructureServicesRegistration.cs" >
+﻿//file="InfrastructureServicesRegistration.cs" >
 
 namespace Order.Infrastructure.Extensions;
 
@@ -20,7 +19,7 @@ public static class InfrastructureServicesRegistration
         services.AddDbContext<OrderDbContext>(
             options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString("defaultConnectionString"),
+                options.UseSqlServer(configuration.GetConnectionString("defaultConnectionString"),
                 x =>
                 {
                     x.MigrationsHistoryTable("__EFMigrationsHistoryOrder");

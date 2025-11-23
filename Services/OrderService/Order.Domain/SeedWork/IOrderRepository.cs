@@ -7,5 +7,5 @@ namespace Order.Domain.SeedWork;
 /// </summary>
 public interface IOrderRepository : IGenericRepository<OrderEntity>
 {
-    
+
 }

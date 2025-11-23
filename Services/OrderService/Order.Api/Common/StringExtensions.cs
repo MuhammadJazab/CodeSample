@@ -1,5 +1,4 @@
-﻿using System;
-namespace Order.Api.Common
+﻿namespace Order.Api.Common
 {
     public static class StringExtensions
     {

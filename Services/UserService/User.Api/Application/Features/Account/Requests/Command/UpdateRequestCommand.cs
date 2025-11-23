@@ -11,7 +11,7 @@ public class UpdateRequestCommand : IRequest<UpdateResponse>
     /// Gets or sets the UserId.
     /// </summary>
     public string? UserId { get; set; }
-    
+
     /// <summary>
     /// Gets or sets the UserName.
     /// </summary>

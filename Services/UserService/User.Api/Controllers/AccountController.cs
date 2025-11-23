@@ -30,7 +30,7 @@ public class AccountController : BaseController<AccountController>
 
         return usersResponse is not null ? Ok(usersResponse) : BadRequest(usersResponse);
     }
-    
+
     /// <summary>
     /// Get User by Id.
     /// </summary>

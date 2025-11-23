@@ -2,11 +2,8 @@
 
 namespace Order.Infrastructure.Data;
 
-public class OrderDbContext : DbContext, IOrderDbContext
+public class OrderDbContext(DbContextOptions<OrderDbContext> options) : DbContext(options), IOrderDbContext
 {
-    public OrderDbContext(DbContextOptions<OrderDbContext> options) :
-        base(options)
-    { }
 
     /// <summary>
     /// Gets the Database.
@@ -100,7 +97,7 @@ public class OrderDbContextFactory : IDesignTimeDbContextFactory<OrderDbContext>
         var builder = new DbContextOptionsBuilder<OrderDbContext>();
         var connectionString = configuration.GetConnectionString("defaultConnectionString");
 
-        builder.UseNpgsql(connectionString);
+        builder.UseSqlServer(connectionString);
 
         return new OrderDbContext(builder.Options);
     }

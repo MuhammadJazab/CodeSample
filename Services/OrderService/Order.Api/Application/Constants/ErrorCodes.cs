@@ -6,7 +6,7 @@ namespace Order.Api.Application.Constants;
 /// Defines the <see cref="ErrorCodes" />.
 /// </summary>
 public static class ErrorCodes
-{    
+{
     /// <summary>
     /// The generic failed
     /// </summary>

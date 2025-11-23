@@ -40,7 +40,7 @@ public class OrderController : BaseController<OrderController>
     [HttpGet(HttpVerbConstants.OrderById)]
     public async Task<IActionResult> Order(Guid id)
     {
-        GetOrderResponse orderResponse = await mediator.Send(new GetOrderRequest(orderId:id));
+        GetOrderResponse orderResponse = await mediator.Send(new GetOrderRequest(orderId: id));
 
         return orderResponse is not null ? Ok(orderResponse) : BadRequest(orderResponse);
     }
@@ -53,7 +53,7 @@ public class OrderController : BaseController<OrderController>
     [HttpPost(HttpVerbConstants.Orders)]
     public async Task<IActionResult> Order([FromBody] OrderRequest request)
     {
-        GetOrderResponse orderResponse = await mediator.Send(new OrdersRequestCommand(orderRequest:request));
+        GetOrderResponse orderResponse = await mediator.Send(new OrdersRequestCommand(orderRequest: request));
 
         return orderResponse is not null ? Ok(orderResponse) : BadRequest(orderResponse);
     }

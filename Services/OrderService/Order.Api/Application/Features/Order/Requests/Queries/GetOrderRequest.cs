@@ -1,7 +1,4 @@
-﻿
-//file="GetOrderRequest.cs" >
-
-using Order.Domain.Common;
+﻿//file="GetOrderRequest.cs" >
 
 namespace Order.Api.Application.Features.Account.Requests.Queries;
 
@@ -17,6 +14,6 @@ public class GetOrderRequest : IRequest<GetOrderResponse>
     /// </summary>
     public GetOrderRequest(Guid orderId)
     {
-       this.OrdersId = orderId; 
+        this.OrdersId = orderId;
     }
 }

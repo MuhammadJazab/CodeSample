@@ -27,7 +27,7 @@ public class OrderConfiguration
             .HasColumnName(nameof(OrderEntity.CustomerId))
             .HasColumnType("uniqueidentifier")
             .IsRequired();
-        
+
         builder.Property(p => p.ProductId)
             .HasColumnName(nameof(OrderEntity.ProductId))
             .HasColumnType("uniqueidentifier")
