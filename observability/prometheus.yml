@@ -1,27 +1,65 @@
 global:
   scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
 
 scrape_configs:
+  # OpenTelemetry Collector metrics
   - job_name: 'otel-collector'
     static_configs:
       - targets: ['otel-collector:8889']
+    metrics_path: /metrics
+    scrape_interval: 10s
 
+  # Application metrics from Prometheus exporters
   - job_name: 'gateway-api'
     static_configs:
-      - targets: ['host.docker.internal:8081']
+      - targets: ['gateway-api:8081']
     metrics_path: /metrics
+    scrape_interval: 15s
 
   - job_name: 'user-api'
     static_configs:
-      - targets: ['host.docker.internal:5001']
+      - targets: ['user-api:5001']
     metrics_path: /metrics
+    scrape_interval: 15s
 
   - job_name: 'order-api'
     static_configs:
-      - targets: ['host.docker.internal:5002']
+      - targets: ['order-api:5002']
     metrics_path: /metrics
+    scrape_interval: 15s
 
   - job_name: 'notification-api'
     static_configs:
-      - targets: ['host.docker.internal:5003']
+      - targets: ['notification-api:5003']
+    metrics_path: /metrics
+    scrape_interval: 15s
+
+  # Infrastructure monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana:3000']
+    metrics_path: /metrics
+
+  - job_name: 'tempo'
+    static_configs:
+      - targets: ['tempo:3200']
+    metrics_path: /metrics
+
+  - job_name: 'loki'
+    static_configs:
+      - targets: ['loki:3100']
+    metrics_path: /metrics
+
+  - job_name: 'rabbitmq'
+    static_configs:
+      - targets: ['rabbitmq:15692']
     metrics_path: /metrics
