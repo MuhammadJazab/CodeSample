@@ -10,7 +10,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "API Gateway",
+        Title = "Gateway API",
         Version = "v1"
     });
 });

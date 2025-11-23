@@ -48,7 +48,7 @@ public static class ConfigureSwaggerExtensions
             c.SwaggerDoc("v1", new OpenApiInfo
             {
                 Version = "v1",
-                Title = "Authentication API",
+                Title = "User API",
 
             });
 
