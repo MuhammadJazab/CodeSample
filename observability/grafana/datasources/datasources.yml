@@ -5,14 +5,23 @@ datasources:
     type: prometheus
     access: proxy
     url: http://prometheus:9090
-    isDefault: false
+    isDefault: true
+    editable: true
 
   - name: Loki
     type: loki
     access: proxy
     url: http://loki:3100
+    editable: true
+    jsonData:
+      maxLines: 1000
 
   - name: Tempo
     type: tempo
     access: proxy
     url: http://tempo:3200
+    editable: true
+    jsonData:
+      httpMethod: GET
+      serviceMap:
+        datasourceUid: 'prometheus'

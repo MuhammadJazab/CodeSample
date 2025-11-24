@@ -16,6 +16,10 @@ services:
         echo 'All certificates generated successfully with proper permissions!'
       "
 
+  sqlserver:
+    ports:
+      - "1433:1433"
+
   rabbitmq:
     ports:
       - "5672:5672"
@@ -30,7 +34,6 @@ services:
   tempo:
     ports:
       - "3200:3200"
-      - "9411:9411"
 
   loki:
     ports:

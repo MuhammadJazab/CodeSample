@@ -41,6 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "observability", "observabil
 		observability\loki-config.yaml = observability\loki-config.yaml
 		observability\otel-collector-config.yaml = observability\otel-collector-config.yaml
 		observability\prometheus.yml = observability\prometheus.yml
+		promtail-config.yml = promtail-config.yml
 		observability\tempo-config.yaml = observability\tempo-config.yaml
 	EndProjectSection
 EndProject

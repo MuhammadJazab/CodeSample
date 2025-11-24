@@ -4,7 +4,6 @@ global:
 
 rule_files:
   # - "first_rules.yml"
-  # - "second_rules.yml"
 
 scrape_configs:
   # OpenTelemetry Collector metrics
@@ -14,40 +13,10 @@ scrape_configs:
     metrics_path: /metrics
     scrape_interval: 10s
 
-  # Application metrics from Prometheus exporters
-  - job_name: 'gateway-api'
-    static_configs:
-      - targets: ['gateway-api:8081']
-    metrics_path: /metrics
-    scrape_interval: 15s
-
-  - job_name: 'user-api'
-    static_configs:
-      - targets: ['user-api:5001']
-    metrics_path: /metrics
-    scrape_interval: 15s
-
-  - job_name: 'order-api'
-    static_configs:
-      - targets: ['order-api:5002']
-    metrics_path: /metrics
-    scrape_interval: 15s
-
-  - job_name: 'notification-api'
-    static_configs:
-      - targets: ['notification-api:5003']
-    metrics_path: /metrics
-    scrape_interval: 15s
-
   # Infrastructure monitoring
   - job_name: 'prometheus'
     static_configs:
       - targets: ['localhost:9090']
-
-  - job_name: 'grafana'
-    static_configs:
-      - targets: ['grafana:3000']
-    metrics_path: /metrics
 
   - job_name: 'tempo'
     static_configs:

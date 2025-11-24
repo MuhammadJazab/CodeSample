@@ -8,6 +8,8 @@ receivers:
 
 processors:
   batch:
+    timeout: 1s
+    send_batch_size: 1024
   resource:
     attributes:
       - key: environment
@@ -17,21 +19,24 @@ processors:
 exporters:
   # Tempo for traces
   otlp/tempo:
-    endpoint: http://tempo:3200
-    tls:
-      insecure: true
-
-  # Loki for logs - using otlphttp exporter
-  otlphttp/loki:
-    endpoint: http://loki:3100/otlp/v1/logs
+    endpoint: http://tempo:4317
     tls:
       insecure: true
 
   # Prometheus for metrics
-  prometheus:
-    endpoint: "0.0.0.0:8889"
+  prometheusremotewrite:
+    endpoint: http://prometheus:9090/api/v1/write
+    tls:
+      insecure: true
 
-  # Debug exporter
+  # File exporter for logs (will be picked up by Promtail)
+  file:
+    path: /tmp/logs/otel-logs.json
+    rotation:
+      max_megabytes: 100
+      max_days: 3
+
+  # Debug exporter for troubleshooting
   debug:
     verbosity: detailed
 
@@ -45,9 +50,9 @@ service:
     metrics:
       receivers: [otlp]
       processors: [batch, resource]
-      exporters: [prometheus, debug]
+      exporters: [prometheusremotewrite, debug]
 
     logs:
       receivers: [otlp]
       processors: [batch, resource]
-      exporters: [otlphttp/loki, debug]
+      exporters: [file, debug]
