@@ -37,17 +37,6 @@ public static class OpenTelemetryExtensions
         return builder;
     }
 
-    /// <summary>
-    /// Maps the Prometheus scraping endpoint for metrics collection
-    /// </summary>
-    /// <param name="app">The web application</param>
-    /// <returns>The app for method chaining</returns>
-    public static WebApplication MapPrometheusScrapingEndpoint(this WebApplication app)
-    {
-        app.MapPrometheusScrapingEndpoint();
-        return app;
-    }
-
     private static void ConfigureTracing(TracerProviderBuilder tracing, WebApplicationBuilder builder)
     {
         tracing

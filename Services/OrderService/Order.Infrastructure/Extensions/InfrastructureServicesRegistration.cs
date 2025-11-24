@@ -19,7 +19,7 @@ public static class InfrastructureServicesRegistration
         services.AddDbContext<OrderDbContext>(
             options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("defaultConnectionString"),
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                 x =>
                 {
                     x.MigrationsHistoryTable("__EFMigrationsHistoryOrder");

@@ -41,7 +41,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.SeedingOrderApiData();
+//app.SeedingOrderApiData();
 
 app.UseHttpsRedirection();
 

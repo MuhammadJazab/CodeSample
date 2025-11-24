@@ -95,7 +95,7 @@ public class OrderDbContextFactory : IDesignTimeDbContextFactory<OrderDbContext>
             .Build();
 
         var builder = new DbContextOptionsBuilder<OrderDbContext>();
-        var connectionString = configuration.GetConnectionString("defaultConnectionString");
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         builder.UseSqlServer(connectionString);
 

@@ -1,14 +1,106 @@
 services:
-  gateway.api:
+  cert-generator:
+    image: mcr.microsoft.com/dotnet/sdk:10.0
+    working_dir: /certs
+    volumes:
+      - ./certs:/certs
+    command: >
+      sh -c "
+        echo 'Generating SSL certificates...' &&
+        mkdir -p gateway user order notification &&
+        dotnet dev-certs https -ep gateway/gateway.pfx -p P@ssw0rd! --trust &&
+        dotnet dev-certs https -ep user/user.pfx -p P@ssw0rd! --trust &&
+        dotnet dev-certs https -ep order/order.pfx -p P@ssw0rd! --trust &&
+        dotnet dev-certs https -ep notification/notification.pfx -p P@ssw0rd! --trust &&
+        chmod 644 gateway/gateway.pfx user/user.pfx order/order.pfx notification/notification.pfx &&
+        echo 'All certificates generated successfully with proper permissions!'
+      "
+
+  rabbitmq:
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  otel-collector:
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+      - "8889:8889"
+
+  tempo:
+    ports:
+      - "3200:3200"
+      - "9411:9411"
+
+  loki:
+    ports:
+      - "3100:3100"
+
+  prometheus:
+    ports:
+      - "9090:9090"
+
+  grafana:
+    ports:
+      - "3000:3000"
+
+  gateway-api:
+    depends_on:
+      - cert-generator
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTPS_PORTS=8081
+      - ASPNETCORE_URLS=https://+:8081;http://+:8080
+      - ASPNETCORE_HTTPS_PORT=8081
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/gateway.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=P@ssw0rd!
     ports:
-      - "8080"
-      - "8081"
+      - "8080:8080"
+      - "8081:8081"
     volumes:
+      - ./certs/gateway:/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  user-api:
+    depends_on:
+      - cert-generator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:5001
+      - ASPNETCORE_HTTPS_PORT=5001
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/user.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=P@ssw0rd!
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./certs/user:/https:ro
+
+  order-api:
+    depends_on:
+      - cert-generator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:5002
+      - ASPNETCORE_HTTPS_PORT=5002
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/order.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=P@ssw0rd!
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./certs/order:/https:ro
+
+  notification-api:
+    depends_on:
+      - cert-generator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:5003
+      - ASPNETCORE_HTTPS_PORT=5003
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/notification.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=P@ssw0rd!
+    ports:
+      - "5003:5003"
+    volumes:
+      - ./certs/notification:/https:ro

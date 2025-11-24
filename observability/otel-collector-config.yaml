@@ -21,10 +21,11 @@ exporters:
     tls:
       insecure: true
 
-  # Loki for logs
-  loki:
-    endpoint: http://loki:3100/loki/api/v1/push
-    tenant_id: "tenant1"
+  # Loki for logs - using otlphttp exporter
+  otlphttp/loki:
+    endpoint: http://loki:3100/otlp/v1/logs
+    tls:
+      insecure: true
 
   # Prometheus for metrics
   prometheus:
@@ -49,4 +50,4 @@ service:
     logs:
       receivers: [otlp]
       processors: [batch, resource]
-      exporters: [loki, debug]
+      exporters: [otlphttp/loki, debug]

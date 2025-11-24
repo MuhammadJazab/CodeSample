@@ -86,7 +86,7 @@ public class UserDbContextFactory : IDesignTimeDbContextFactory<UserDbContext>
             .Build();
 
         var builder = new DbContextOptionsBuilder<UserDbContext>();
-        var connectionString = configuration.GetConnectionString("defaultConnectionString");
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         builder.UseSqlServer(connectionString);
 

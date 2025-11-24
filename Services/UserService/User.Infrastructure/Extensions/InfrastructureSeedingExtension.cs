@@ -13,7 +13,7 @@ public static class InfrastructureSeedingExtension
     public static void AddUserDbContext(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<UserDbContext>(options =>
-           options.UseSqlServer(configuration.GetConnectionString("defaultConnectionString"),
+           options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
            x =>
            {
                x.MigrationsHistoryTable("__EFMigrationsHistory", "user");

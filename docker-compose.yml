@@ -1,16 +1,22 @@
-version: '3.8'
-
 services:
-  # Message Broker
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: "P@ssw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    networks:
+      - microservices
+    # restart: unless-stopped
+
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
-    ports:
-      - "5672:5672"
-      - "15672:15672"
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
     networks:
@@ -21,76 +27,59 @@ services:
       timeout: 10s
       retries: 5
 
-  # Observability Stack
-
-  # OpenTelemetry Collector
   otel-collector:
     image: otel/opentelemetry-collector-contrib:latest
     container_name: otel-collector
     command: ["--config=/etc/otel-collector-config.yaml"]
     volumes:
       - ./observability/otel-collector-config.yaml:/etc/otel-collector-config.yaml
-    ports:
-      - "4317:4317"   # OTLP gRPC receiver
-      - "4318:4318"   # OTLP HTTP receiver
-      - "8889:8889"   # Prometheus metrics
     depends_on:
       - tempo
       - loki
     networks:
       - microservices
-    restart: unless-stopped
+    # restart: unless-stopped
 
-  # Tempo for distributed tracing
   tempo:
     image: grafana/tempo:latest
     container_name: tempo
-    command: [ "-config.file=/etc/tempo.yaml" ]
+    user: root  # Add this line
+    command: ["-config.file=/etc/tempo.yaml"]
     volumes:
       - ./observability/tempo-config.yaml:/etc/tempo.yaml
       - tempo-data:/tmp/tempo
-    ports:
-      - "3200:3200"   # Tempo
-      - "9411:9411"   # Zipkin
     networks:
       - microservices
-    restart: unless-stopped
+    # restart: unless-stopped
 
-  # Loki for log aggregation
   loki:
     image: grafana/loki:latest
     container_name: loki
+    user: root  # Add this line
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - ./observability/loki-config.yaml:/etc/loki/local-config.yaml
       - loki-data:/loki
-    ports:
-      - "3100:3100"
     networks:
       - microservices
-    restart: unless-stopped
+    # restart: unless-stopped
 
-  # Prometheus for metrics
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
+    user: root  # Add this line
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
-      - '--storage.tsdb.retention.time=200h'
-      - '--web.enable-lifecycle'
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=200h"
+      - "--web.enable-lifecycle"
     volumes:
       - ./observability/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus-data:/prometheus
-    ports:
-      - "9090:9090"
     networks:
       - microservices
-    restart: unless-stopped
+    # restart: unless-stopped
 
-  # Grafana for visualization
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
@@ -101,34 +90,25 @@ services:
     volumes:
       - ./observability/grafana:/etc/grafana/provisioning
       - grafana-data:/var/lib/grafana
-    ports:
-      - "3000:3000"
     depends_on:
       - prometheus
       - loki
       - tempo
     networks:
       - microservices
-    restart: unless-stopped
+    # restart: unless-stopped
 
-  # Application Services
-
-  # Gateway API
   gateway-api:
     build:
       context: .
       dockerfile: Gateway/Gateway.Api/Dockerfile
-    container_name: gateway-api
+    container_name: gateway.api
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8081
       - OpenTelemetry__ServiceName=Gateway.Api
       - OpenTelemetry__OtlpEndpoint=http://otel-collector:4317
       - ReverseProxy__Clusters__user-cluster__Destinations__destination1__Address=http://user-api:5001
       - ReverseProxy__Clusters__order-cluster__Destinations__destination1__Address=http://order-api:5002
       - ReverseProxy__Clusters__notification-cluster__Destinations__destination1__Address=http://notification-api:5003
-    ports:
-      - "8081:8081"
     depends_on:
       - otel-collector
       - user-api
@@ -136,23 +116,14 @@ services:
       - notification-api
     networks:
       - microservices
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8081/health || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+    # restart: unless-stopped
 
-  # User API
   user-api:
     build:
       context: .
       dockerfile: Services/UserService/User.Api/Dockerfile
-    container_name: user-api
+    container_name: user.api
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5001
-      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=UserServiceDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=true;MultipleActiveResultSets=true
       - OpenTelemetry__ServiceName=User.Api
       - OpenTelemetry__OtlpEndpoint=http://otel-collector:4317
       - MassTransit__RabbitMQ__Host=rabbitmq
@@ -162,74 +133,49 @@ services:
       - JwtSettings__Audience=CodeSample.Api
       - JwtSettings__Key=your-secret-key-here-make-it-long-enough-for-security
       - JwtSettings__DurationInMinutes=60
-    ports:
-      - "5001:5001"
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=UserServiceDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=true;MultipleActiveResultSets=true
     depends_on:
-      sqlserver:
-        condition: service_healthy
       rabbitmq:
         condition: service_healthy
       otel-collector:
         condition: service_started
     networks:
       - microservices
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:5001/health || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+    # restart: unless-stopped
 
-  # Order API
   order-api:
     build:
       context: .
       dockerfile: Services/OrderService/Order.Api/Dockerfile
-    container_name: order-api
+    container_name: order.api
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5002
-      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=OrderServiceDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=true;MultipleActiveResultSets=true
       - OpenTelemetry__ServiceName=Order.Api
       - OpenTelemetry__OtlpEndpoint=http://otel-collector:4317
       - MassTransit__RabbitMQ__Host=rabbitmq
       - MassTransit__RabbitMQ__Username=guest
       - MassTransit__RabbitMQ__Password=guest
-    ports:
-      - "5002:5002"
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=OrderServiceDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=true;MultipleActiveResultSets=true
     depends_on:
-      sqlserver:
-        condition: service_healthy
       rabbitmq:
         condition: service_healthy
       otel-collector:
         condition: service_started
     networks:
       - microservices
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:5002/health || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+    # restart: unless-stopped
 
-  # Notification API
   notification-api:
     build:
       context: .
       dockerfile: Services/NotificationService/Notification.Api/Dockerfile
     container_name: notification-api
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5003
       - OpenTelemetry__ServiceName=Notification.Api
       - OpenTelemetry__OtlpEndpoint=http://otel-collector:4317
       - RabbitMQ__HostName=rabbitmq
       - RabbitMQ__QueueName=order-notifications
       - RabbitMQ__Username=guest
       - RabbitMQ__Password=guest
-    ports:
-      - "5003:5003"
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -237,15 +183,9 @@ services:
         condition: service_started
     networks:
       - microservices
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:5003/health || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+    # restart: unless-stopped
 
 volumes:
-  sqlserver-data:
   rabbitmq-data:
   prometheus-data:
   grafana-data:
