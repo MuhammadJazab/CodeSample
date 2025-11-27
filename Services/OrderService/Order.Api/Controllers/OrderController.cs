@@ -5,19 +5,16 @@ namespace Order.Api.Controllers;
 /// <summary>
 /// Defines the <see cref="OrderController" />.
 /// </summary>
+/// <remarks>
+///  Initializes a new instance of the <see cref="OrderController"/> class.
+/// </remarks>
+/// <param name="mediator"></param>
+/// <param name="logger"></param>
+/// <param name="httpContextAccessor"></param>
 [Route("api/[controller]")]
 [ApiController]
-public class OrderController : BaseController<OrderController>
+public class OrderController(IMediator mediator, ILogger<OrderController> logger, IHttpContextAccessor httpContextAccessor) : BaseController<OrderController>(mediator, logger, httpContextAccessor)
 {
-    /// <summary>
-    ///  Initializes a new instance of the <see cref="OrderController"/> class.
-    /// </summary>
-    /// <param name="mediator"></param>
-    /// <param name="logger"></param>
-    /// <param name="httpContextAccessor"></param>
-    public OrderController(IMediator mediator, ILogger<OrderController> logger, IHttpContextAccessor httpContextAccessor)
-        : base(mediator, logger, httpContextAccessor)
-    { }
 
     /// <summary>
     /// Get all Orders request.

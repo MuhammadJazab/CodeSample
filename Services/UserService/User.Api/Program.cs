@@ -49,7 +49,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//app.SeedUserApiData();
+app.SeedUserApiData();
 
 app.MapPrometheusScrapingEndpoint();
 

@@ -32,6 +32,7 @@ builder.Services.AddCors(option => option.AddPolicy(name: corsPolicy, builder =>
     builder.AllowAnyHeader();
     builder.AllowAnyMethod();
 }));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -41,7 +42,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.SeedingOrderApiData();
+app.SeedingOrderApiData();
 
 app.UseHttpsRedirection();
 

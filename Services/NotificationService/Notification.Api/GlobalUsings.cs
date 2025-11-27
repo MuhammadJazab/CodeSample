@@ -1,5 +1,6 @@
 ﻿//file="GlobalUsings.cs" >
 
+global using Microsoft.AspNetCore.Mvc;
 global using Notification.Api.IntegrationEvents.EventHandlers;
 global using Notification.Api.IntegrationEvents.Events;
 global using OpenTelemetryExtension;

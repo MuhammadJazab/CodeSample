@@ -1,5 +1,7 @@
 //file="Program.cs" >
 
+var corsPolicy = "CorsPolicy";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add OpenTelemetry
@@ -11,6 +13,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<OrderCreationIntegratoinEventHandler>();
+
+builder.Services.AddCors(option => option.AddPolicy(name: corsPolicy, builder =>
+{
+    builder.AllowAnyOrigin();
+    builder.AllowAnyHeader();
+    builder.AllowAnyMethod();
+    builder.AllowCredentials();
+}));
 
 var app = builder.Build();
 
