@@ -18,32 +18,22 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-//builder.WebHost.ConfigureKestrel(options =>
-//{
-//    options.ListenAnyIP(0, listenOptions =>
-//    {
-//        listenOptions.Protocols = HttpProtocols.Http1;
-//    });
-//});
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-app.MapOpenApi();
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+if (app.Environment.IsDevelopment())
 {
-    c.SwaggerEndpoint("/swagger/notification/swagger.json", "Notification Service");
-    c.SwaggerEndpoint("/swagger/order/swagger.json", "Order Service");
-    c.SwaggerEndpoint("/swagger/user/swagger.json", "User Service");
-});
-//}
+    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/notification/swagger.json", "Notification Service");
+        c.SwaggerEndpoint("/swagger/order/swagger.json", "Order Service");
+        c.SwaggerEndpoint("/swagger/user/swagger.json", "User Service");
+    });
+}
 
 app.MapReverseProxy();
-
-//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
