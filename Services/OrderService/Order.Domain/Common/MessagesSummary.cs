@@ -5,16 +5,12 @@ namespace Order.Domain.Common;
 /// <summary>
 /// Defines the <see cref="MessagesSummary" />.
 /// </summary>
+/// <remarks>
+/// Initializes a new instance of the <see cref="MessagesSummary"/> class.
+/// </remarks>
 [ExcludeFromCodeCoverage]
 public sealed class MessagesSummary
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MessagesSummary"/> class.
-    /// </summary>
-    public MessagesSummary()
-    {
-        Messages = new List<Message>();
-    }
 
     /// <summary>
     /// Gets or sets the StatusCode.
@@ -25,12 +21,12 @@ public sealed class MessagesSummary
     /// <summary>
     /// Gets or sets the TraceId.
     /// </summary>
-    public string TraceId { get; set; } = string.Empty;
+    public string TraceId { get; set; } = Activity.Current?.Context.TraceId.ToString() ?? string.Empty;
 
     /// <summary>
     /// Gets or sets the Messages.
     /// </summary>
-    public List<Message> Messages { get; set; }
+    public List<Message> Messages { get; set; } = [];
 
     /// <summary>
     /// Gets or sets a value indicating whether IsValid.
@@ -127,7 +123,7 @@ public sealed class MessagesSummary
     /// <param name="code">The code<see cref="string"/>.</param>
     public void AddError(string errorMessage, MessageDisplayTypes messageDisplayType, string code)
     {
-        Messages ??= new List<Message>();
+        Messages ??= [];
 
         Messages.Add(new Message()
         {

@@ -53,6 +53,8 @@ public static class OpenTelemetryExtensions
                     activity.SetTag("http.request.method", httpRequest.Method);
                     activity.SetTag("http.request.scheme", httpRequest.Scheme);
                     activity.SetTag("http.request.host", httpRequest.Host.Value);
+                    activity.SetTag("http.request.payload", httpRequest.Body.ToString());
+                    activity.SetTag("http.request.uri", httpRequest.QueryString.ToString());
                 };
                 options.EnrichWithHttpResponse = (activity, httpResponse) =>
                 {
