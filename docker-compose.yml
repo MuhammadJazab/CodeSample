@@ -105,16 +105,11 @@ services:
       - microservices
 
   gateway-api:
+    image: ${DOCKER_REGISTRY-}gateway-api
     build:
       context: .
       dockerfile: Gateway/Gateway.Api/Dockerfile
     container_name: gateway-api
-    # environment:
-    #   - OpenTelemetry__ServiceName=Gateway.Api
-    #   - OpenTelemetry__OtlpEndpoint=http://otel-collector:4317
-    #   - ReverseProxy__Clusters__user-cluster__Destinations__destination1__Address=http://user-api:5001
-    #   - ReverseProxy__Clusters__order-cluster__Destinations__destination1__Address=http://order-api:5002
-    #   - ReverseProxy__Clusters__notification-cluster__Destinations__destination1__Address=http://notification-api:5003
     depends_on:
       - otel-collector
       - user-api
@@ -124,21 +119,11 @@ services:
       - microservices
 
   user-api:
+    image: ${DOCKER_REGISTRY-}user-api
     build:
       context: .
       dockerfile: Services/UserService/User.Api/Dockerfile
     container_name: user-api
-    # environment:
-    #   - OpenTelemetry__ServiceName=User.Api
-    #   - OpenTelemetry__OtlpEndpoint=http://otel-collector:4317
-    #   - MassTransit__RabbitMQ__Host=rabbitmq
-    #   - MassTransit__RabbitMQ__Username=guest
-    #   - MassTransit__RabbitMQ__Password=guest
-    #   - JwtSettings__Issuer=CodeSample.UserService
-    #   - JwtSettings__Audience=CodeSample.Api
-    #   - JwtSettings__Key=your-secret-key-here-make-it-long-enough-for-security
-    #   - JwtSettings__DurationInMinutes=60
-    #   - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=UserServiceDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=true;MultipleActiveResultSets=true
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -148,17 +133,11 @@ services:
       - microservices
 
   order-api:
+    image: ${DOCKER_REGISTRY-}order-api
     build:
       context: .
       dockerfile: Services/OrderService/Order.Api/Dockerfile
-    container_name: order-api
-    # environment:
-    #   - OpenTelemetry__ServiceName=Order.Api
-    #   - OpenTelemetry__OtlpEndpoint=http://otel-collector:4317
-    #   - MassTransit__RabbitMQ__Host=rabbitmq
-    #   - MassTransit__RabbitMQ__Username=guest
-    #   - MassTransit__RabbitMQ__Password=guest
-    #   - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=OrderServiceDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=true;MultipleActiveResultSets=true
+    container_name: order-api 
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -168,17 +147,11 @@ services:
       - microservices
 
   notification-api:
+    image: ${DOCKER_REGISTRY-}notification-api
     build:
       context: .
       dockerfile: Services/NotificationService/Notification.Api/Dockerfile
     container_name: notification-api
-    # environment:
-    #   - OpenTelemetry__ServiceName=Notification.Api
-    #   - OpenTelemetry__OtlpEndpoint=http://otel-collector:4317
-    #   - RabbitMQ__HostName=rabbitmq
-    #   - RabbitMQ__QueueName=order-notifications
-    #   - RabbitMQ__Username=guest
-    #   - RabbitMQ__Password=guest
     depends_on:
       rabbitmq:
         condition: service_healthy
